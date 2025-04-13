@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>random02.html</title>
+    <title>random01.html</title>
   </head>
   <body>
     <button class="btn">CLICK</button>
@@ -13,11 +13,14 @@
       const result = document.querySelector('.result');
 
       btn.addEventListener('click', () => {
-        let randomNum = Math.floor(Math.random() * 10) + 1;
-        if (randomNum != 10) {
-          randomNum = `0${randomNum}`;
+        let num = 0;
+
+        for (let i = 0; i < 10; i++) {
+          const randomNum = Math.floor(Math.random() * 10) + 1;
+          console.log(randomNum);
+          num += randomNum;
         }
-        result.textContent = randomNum;
+        result.textContent = num;
       });
     </script>
   </body>

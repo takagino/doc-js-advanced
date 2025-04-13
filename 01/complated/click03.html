@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>click01.html</title>
+    <title>click02.html</title>
   </head>
   <body>
     <button class="btn">CLICK</button>
@@ -12,10 +12,15 @@
       const btn = document.querySelector('.btn');
       const result = document.querySelector('.result');
       let count = 0;
+      let num = 1;
 
       btn.addEventListener('click', () => {
-        count++;
+        count += num;
         result.textContent = count;
+
+        if (count >= 10 || count <= 0) {
+          num = -num;
+        }
       });
     </script>
   </body>

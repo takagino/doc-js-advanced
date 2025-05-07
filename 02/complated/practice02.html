@@ -10,7 +10,8 @@
     <script>
       const text = 'Hello World';
       const textArray = [...text];
-      textArray.forEach((char) => {
+      const filteredTextArray = textArray.filter((char) => char !== ' ');
+      filteredTextArray.forEach((char) => {
         const li = document.createElement('li');
         li.textContent = char;
         document.querySelector('ul').appendChild(li);

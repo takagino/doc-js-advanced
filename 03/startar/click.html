@@ -32,7 +32,12 @@
     <dl>
       <dt class="name">名前</dt>
       <dd>
-        <img class="pic" src="./monster/slime.png" alt="" width="200" />
+        <img
+          class="pic"
+          src="https://trident.takagino.net/doc2023/javascript/assets/03/click/images/slime.png"
+          alt=""
+          width="200"
+        />
       </dd>
       <dd class="hp">HP:0</dd>
     </dl>
@@ -69,6 +74,7 @@
         hpEl.textContent = `HP:${currentHp}`;
       };
 
+      //関数の実行
       setMonster(monsters[currentMonster]);
 
       picEl.addEventListener('click', () => {
@@ -77,6 +83,7 @@
           hpEl.textContent = `HP:${currentHp}`;
         } else {
           currentMonster++;
+          //if文に変更
           if (currentMonster >= monsters.length) {
             alert('モンスターを全て倒しました！');
           } else {

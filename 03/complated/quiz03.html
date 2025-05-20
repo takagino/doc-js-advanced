@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3択クイズ - 応用01</title>
+    <title>3択クイズ - 応用02</title>
     <style>
       .container {
         max-width: 600px;
@@ -85,6 +85,7 @@
         },
       ];
 
+      let errataData = [];
       const container = document.querySelector('.container');
       let currentQuiz = 0;
       let score = 0;
@@ -117,19 +118,41 @@
           choiceBtn.setAttribute('name', 'answer');
           choiceBtn.setAttribute('value', key);
           choiceBtn.addEventListener('click', () => {
+            let judgement = '';
             if (key === currentQuizData.answer) {
               score++;
+              judgement = '○';
+            } else {
+              judgement = '×';
             }
+
+            errataData.push({
+              question: currentQuizData.question,
+              answer: currentQuizData.choices[currentQuizData.answer],
+              selected: value,
+              judgement: judgement,
+            });
+
             currentQuiz++;
             if (currentQuiz < limit) {
               loadQuiz();
             } else {
               container.innerHTML = `<h2>あなたのスコアは ${score} / ${limit} です</h2>`;
+              const errataElement = document.createElement('div');
+              errataElement.innerHTML = '<h3>間違えた問題</h3>';
+              errataData.forEach((errata) => {
+                const errataItem = document.createElement('p');
+                errataItem.textContent = `${errata.question} - 正解: ${errata.answer}, あなたの選択: ${errata.selected}, 判定: ${errata.judgement}`;
+                errataElement.append(errataItem);
+              });
+              container.append(errataElement);
+
               const restartBtn = document.createElement('button');
               restartBtn.textContent = '再挑戦';
               restartBtn.addEventListener('click', () => {
                 currentQuiz = 0;
                 score = 0;
+                errataData = [];
                 shuffledQuizData = shuffle([...quizData]);
                 loadQuiz();
               });

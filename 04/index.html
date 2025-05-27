@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const str = 'hello';
+      console.log(str);
+
+      /* スプレッド演算子で配列に分配
+--------------------*/
+      const strArr = [...str];
+      console.log(strArr);
+
+      /* 配列の値を結合し文字列を生成する（join）
+--------------------*/
+      const joinArr = strArr.join('/');
+      console.log(joinArr);
+
+      /* 文字列の値を分割し配列を生成する（split）
+--------------------*/
+      const splitArr = joinArr.split('/');
+      console.log(splitArr);
+
+      /* 分割代入への応用
+--------------------*/
+      const [first, , second, ...other] = joinArr.split('/');
+      console.log(first);
+      console.log(second);
+    </script>
+  </body>
+</html>

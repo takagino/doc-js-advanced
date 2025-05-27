@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing</title>
+    <style>
+      body {
+        padding-top: 40px;
+        font-family: 'Courier New', monospace;
+        text-align: center;
+      }
+
+      #target {
+        font-size: 48px;
+        letter-spacing: 0.1em;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="target">word</p>
+    <p id="result">Finished! 10 seconds!</p>
+
+    <script>
+      const targetEl = document.querySelector('#target');
+      const words = ['red', 'blue', 'pink']; //配列の形で単語を増やす
+      let word; //現在の単語を入れるための変数
+      let loc = 0;
+
+      //ランダムに単語を選択し画面に表示する
+      word = words[Math.floor(Math.random() * words.length)];
+      targetEl.textContent = word;
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== word[loc]) {
+          return;
+        }
+
+        loc++;
+        targetEl.textContent = '_'.repeat(loc) + word.substring(loc);
+      });
+    </script>
+  </body>
+</html>

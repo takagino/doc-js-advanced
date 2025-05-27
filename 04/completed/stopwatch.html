@@ -67,15 +67,14 @@
       const startBtn = document.querySelector('#start');
       const stopBtn = document.querySelector('#stop');
       const resetBtn = document.querySelector('#reset');
-      let startTime,
-        elapsedTime = 0,
-        timerId = null;
 
-      // 初期状態では、StopとResetボタンを非アクティブにする
+      let startTime = 0;
+      let elapsedTime = 0;
+      let timerId = null;
+
       stopBtn.classList.add('inactive');
       resetBtn.classList.add('inactive');
 
-      // タイマーをカウントアップする関数
       const countUp = () => {
         const d = new Date(Date.now() - startTime + elapsedTime);
         const m = String(d.getMinutes()).padStart(2, '0');
@@ -90,8 +89,10 @@
 
       startBtn.addEventListener('click', (e) => {
         if (e.target.classList.contains('inactive')) return;
+
         startTime = Date.now();
         countUp();
+
         startBtn.classList.add('inactive');
         stopBtn.classList.remove('inactive');
         resetBtn.classList.add('inactive');
@@ -99,18 +100,25 @@
 
       stopBtn.addEventListener('click', (e) => {
         if (e.target.classList.contains('inactive')) return;
+
         elapsedTime += Date.now() - startTime;
         clearTimeout(timerId);
+
         startBtn.classList.remove('inactive');
         stopBtn.classList.add('inactive');
         resetBtn.classList.remove('inactive');
       });
 
+      //「リセットボタン」にクリックイベントを登録する
       resetBtn.addEventListener('click', (e) => {
         if (e.target.classList.contains('inactive')) return;
-        clearTimeout(timerId);
+
+        //それぞれの値を初期状態に戻す
         elapsedTime = 0;
         timerEl.textContent = '00:00.000';
+        clearTimeout(timerId);
+
+        //ボタンクリックの可・不可を設定する
         startBtn.classList.remove('inactive');
         stopBtn.classList.add('inactive');
         resetBtn.classList.add('inactive');

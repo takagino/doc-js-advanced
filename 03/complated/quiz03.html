@@ -107,11 +107,11 @@
         container.innerHTML = '';
 
         const currentQuizData = shuffledQuizData[currentQuiz];
-        const questionElement = document.createElement('h2');
-        questionElement.textContent = currentQuizData.question;
-        container.append(questionElement);
+        const questionEl = document.createElement('h2');
+        questionEl.textContent = currentQuizData.question;
+        container.append(questionEl);
 
-        const choicesElement = document.createElement('div');
+        const choicesEl = document.createElement('div');
         for (const [key, value] of Object.entries(currentQuizData.choices)) {
           const choiceBtn = document.createElement('button');
           choiceBtn.textContent = value;
@@ -138,14 +138,14 @@
               loadQuiz();
             } else {
               container.innerHTML = `<h2>あなたのスコアは ${score} / ${limit} です</h2>`;
-              const errataElement = document.createElement('div');
-              errataElement.innerHTML = '<h3>間違えた問題</h3>';
+              const errataEl = document.createElement('div');
+              errataEl.innerHTML = '<h3>間違えた問題</h3>';
               errataData.forEach((errata) => {
                 const errataItem = document.createElement('p');
                 errataItem.textContent = `${errata.question} - 正解: ${errata.answer}, あなたの選択: ${errata.selected}, 判定: ${errata.judgement}`;
-                errataElement.append(errataItem);
+                errataEl.append(errataItem);
               });
-              container.append(errataElement);
+              container.append(errataEl);
 
               const restartBtn = document.createElement('button');
               restartBtn.textContent = '再挑戦';
@@ -159,9 +159,9 @@
               container.append(restartBtn);
             }
           });
-          choicesElement.append(choiceBtn);
+          choicesEl.append(choiceBtn);
         }
-        container.append(choicesElement);
+        container.append(choicesEl);
       };
 
       loadQuiz();

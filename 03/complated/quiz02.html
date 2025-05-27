@@ -106,11 +106,11 @@
         container.innerHTML = '';
 
         const currentQuizData = shuffledQuizData[currentQuiz];
-        const questionElement = document.createElement('h2');
-        questionElement.textContent = currentQuizData.question;
-        container.append(questionElement);
+        const questionEl = document.createElement('h2');
+        questionEl.textContent = currentQuizData.question;
+        container.append(questionEl);
 
-        const choicesElement = document.createElement('div');
+        const choicesEl = document.createElement('div');
         for (const [key, value] of Object.entries(currentQuizData.choices)) {
           const choiceBtn = document.createElement('button');
           choiceBtn.textContent = value;
@@ -136,9 +136,9 @@
               container.append(restartBtn);
             }
           });
-          choicesElement.append(choiceBtn);
+          choicesEl.append(choiceBtn);
         }
-        container.append(choicesElement);
+        container.append(choicesEl);
       };
 
       loadQuiz();

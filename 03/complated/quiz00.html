@@ -28,21 +28,21 @@
         },
       ];
 
-      const questionElement = document.querySelector('.question');
-      const resultElement = document.querySelector('.result');
+      const questionEl = document.querySelector('.question');
+      const resultEl = document.querySelector('.result');
       const answerInput = document.querySelector('.answer');
-      const submitButton = document.querySelector('.submit');
+      const submitBtn = document.querySelector('.submit');
       let currentQuiz = 0;
       let score = 0;
 
       const loadQuiz = () => {
-        questionElement.innerHTML = '';
+        questionEl.innerHTML = '';
 
         const currentQuizData = quizData[currentQuiz];
-        questionElement.textContent = currentQuizData.question;
+        questionEl.textContent = currentQuizData.question;
       };
 
-      submitButton.addEventListener('click', () => {
+      submitBtn.addEventListener('click', () => {
         const userAnswer = answerInput.value.trim();
         if (userAnswer === quizData[currentQuiz].answer) {
           score++;
@@ -55,17 +55,17 @@
         } else {
           const resultText = document.createElement('h2');
           resultText.textContent = `あなたのスコアは ${score} / ${quizData.length} です`;
-          resultElement.append(resultText);
+          resultEl.append(resultText);
 
           const restartBtn = document.createElement('button');
           restartBtn.textContent = '再挑戦';
           restartBtn.addEventListener('click', () => {
-            resultElement.textContent = '';
+            resultEl.textContent = '';
             currentQuiz = 0;
             score = 0;
             loadQuiz();
           });
-          resultElement.append(restartBtn);
+          resultEl.append(restartBtn);
         }
       });
 

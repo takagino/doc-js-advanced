@@ -19,25 +19,59 @@
   </head>
   <body>
     <p id="target">word</p>
-    <p id="result">Finished! 10 seconds!</p>
+    <p id="result"></p>
 
     <script>
       const targetEl = document.querySelector('#target');
-      const words = ['red', 'blue', 'pink']; //配列の形で単語を増やす
-      let word; //現在の単語を入れるための変数
+      const resultEl = document.querySelector('#result');
+      const words = ['red', 'blue', 'pink'];
+      let currentWord = 0;
       let loc = 0;
+      let isPlaying = false;
+      let startTime;
 
-      //ランダムに単語を選択し画面に表示する
-      word = words[Math.floor(Math.random() * words.length)];
-      targetEl.textContent = word;
+      targetEl.textContent = `Click to start!`;
+
+      const setWord = () => {
+        targetEl.textContent = words[currentWord];
+        loc = 0;
+      };
+
+      document.addEventListener('click', () => {
+        if (isPlaying) {
+          return;
+        }
+
+        isPlaying = true;
+        startTime = Date.now();
+        setWord();
+      });
 
       document.addEventListener('keydown', (e) => {
-        if (e.key !== word[loc]) {
+        if (!isPlaying) {
+          return;
+        }
+
+        if (e.key !== words[currentWord][loc]) {
           return;
         }
 
         loc++;
-        targetEl.textContent = '_'.repeat(loc) + word.substring(loc);
+        targetEl.textContent = '_'.repeat(loc) + words[currentWord].substring(loc);
+
+        if (loc >= words[currentWord].length) {
+          currentWord++;
+
+          if (currentWord >= words.length) {
+            targetEl.textContent = 'All words completed!';
+            const elapsedTime = ((Date.now() - startTime) / 1000).toFixed(2);
+            result.textContent = `Finished! ${elapsedTime} seconds!`;
+
+            isPlaying = false;
+          } else {
+            setWord();
+          }
+        }
       });
     </script>
   </body>

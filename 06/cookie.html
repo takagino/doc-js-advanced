@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie</title>
+  </head>
+  <body>
+    <button id="save">保存</button>
+    <button id="get">取得</button>
+    <button id="delete">削除</button>
+
+    <script>
+      const save = document.querySelector('#save');
+      const get = document.querySelector('#get');
+      const del = document.querySelector('#delete');
+
+      const getCookieValue = (key) => {
+        const cookies = decodeURIComponent(document.cookie).split(';');
+        for (const cookie of cookies) {
+          const [k, ...rest] = cookie.split('=');
+          if (k.trim() === key.trim()) {
+            return rest.join('=');
+          }
+        }
+        return null;
+      };
+
+      let obj = {
+        name: '高木',
+        age: 44,
+      };
+
+      save.addEventListener('click', () => {
+        let val = encodeURIComponent(JSON.stringify(obj));
+        localStorage.setItem('text', val);
+      });
+
+      get.addEventListener('click', () => {
+        let local = decodeURIComponent(localStorage.getItem('text'));
+
+        alert(local !== 'null' ? JSON.parse(local).name : 'ストレージは存在しません');
+      });
+
+      del.addEventListener('click', () => {
+        localStorage.clear();
+      });
+    </script>
+  </body>
+</html>

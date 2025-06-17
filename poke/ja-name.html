@@ -23,6 +23,15 @@
     <script>
       const API_BASE = 'https://pokeapi.co/api/v2';
 
+      const toFullWidthKatakana = (str) => {
+        return str.replace(/[\u3041-\u3096]/g, (match) => {
+          return String.fromCharCode(match.charCodeAt(0) + 0x60);
+        });
+      };
+      document.getElementById('pokemonName').addEventListener('input', (event) => {
+        event.target.value = toFullWidthKatakana(event.target.value);
+      });
+
       document.getElementById('searchBtn').addEventListener('click', async () => {
         const input = document.getElementById('pokemonName').value.trim();
         const resultDiv = document.getElementById('result');

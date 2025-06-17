@@ -8,9 +8,9 @@
 
   <body>
     <input type="text" id="pokemonName" placeholder="ポケモンの名前を入力" />
-    <button id="submit">ポケモンを取得</button>
-    <button id="save">ポケモンを保存</button>
-    <button id="delete">ポケモンを削除</button>
+    <button id="submit">取得</button>
+    <button id="save">保存</button>
+    <button id="delete">削除</button>
     <div class="container"></div>
     <script>
       const container = document.querySelector('.container');
@@ -21,15 +21,17 @@
       let pokemonData = null;
 
       saveButton.addEventListener('click', () => {
-        if (!pokemonData || pokemonData == 'null') {
+        if (!pokemonData) {
           container.textContent = 'ポケモンデータがありません。まずポケモンを取得してください。';
           return;
         }
+
         const val = encodeURIComponent(JSON.stringify(pokemonData));
         localStorage.setItem('pokemonData', val);
         container.textContent = 'ポケモンデータを保存しました';
       });
 
+      // 追加
       deleteButton.addEventListener('click', () => {
         localStorage.removeItem('pokemonData');
         container.textContent = 'ポケモンデータを削除しました';
@@ -37,6 +39,7 @@
 
       submitButton.addEventListener('click', () => {
         const pokemonName = pokemonNameInput.value;
+
         if (!pokemonName) {
           container.textContent = 'ポケモンの名前を入力してください';
           return;
@@ -52,23 +55,21 @@
 
             showPokemon(data);
           })
-          .catch((error) => console.error(`Error: ${error}`))
-          .finally(() => console.log('Finished!'));
+          .catch((error) => console.error(`Error: ${error}`));
       });
 
-      //取得したデータを画面に表示する関数
       const showPokemon = (data) => {
         const pokemon = `
-          <h2>${data.name}</h2>
-          <img src="${data.sprites.front_default}" alt="${data.name}">
-          <ul>
-            ${data.abilities.map((ability) => `<li>${ability.ability.name}</li>`).join('')}
-          </ul>
-        `;
+        <h2>${data.name}</h2>
+        <img src="${data.sprites.front_default}" alt="${data.name}">
+        <ul>
+          ${data.abilities.map((ability) => `<li>${ability.ability.name}</li>`).join('')}
+        </ul>
+      `;
 
         container.insertAdjacentHTML('beforeend', pokemon);
 
-        pokemonData = data; // 取得したポケモンデータを保存
+        pokemonData = data;
       };
 
       const storedPokemonData = localStorage.getItem('pokemonData');

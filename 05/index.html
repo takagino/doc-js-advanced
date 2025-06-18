@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非同期処理</title>
+</head>
+
+<body>
+    <div class="container"></div>
+    <script>
+        fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                container.textContent = '取得完了!';
+
+                showPokemon(data);
+            })
+            .catch(error => console.error(`Error: ${error}`))
+            .finally(() => console.log('Finished!'));
+
+
+        const container = document.querySelector('.container');
+        container.textContent = '取得中...';
+
+        //取得したデータを画面に表示する関数
+        const showPokemon = (data) => {
+            console.log(data.name);
+
+            const name = document.createElement('h2');
+            name.textContent = data.name;
+            container.appendChild(name);
+
+            const img = document.createElement('img');
+            img.src = data.sprites.front_default;
+            container.appendChild(img);
+
+            const ul = document.createElement('ul');
+            data.abilities.forEach((item) => {
+                const li = document.createElement('li');
+                li.textContent = item.ability.name;
+                ul.appendChild(li);
+            });
+            container.appendChild(ul);
+        };
+    </script>
+</body>
+
+</html>

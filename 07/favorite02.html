@@ -17,6 +17,8 @@
         getFirestore,
         doc,
         setDoc,
+        collection,
+        getDocs,
       } from 'https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js';
 
       const firebaseConfig = {
@@ -34,6 +36,30 @@
       const container = document.querySelector('.container');
       const nameInput = document.querySelector('#pokemonName');
       const submitButton = document.querySelector('#submit');
+
+      const loadFavorites = () => {
+        container.textContent = 'お気に入りを読み込み中...';
+
+        const myCollection = collection(db, 'pokemon');
+        getDocs(myCollection)
+          .then((snapshot) => {
+            if (snapshot.empty) {
+              container.textContent = 'お気に入りはありません。';
+              return;
+            }
+            container.textContent = '';
+            snapshot.forEach((doc) => {
+              const data = doc.data();
+              renderPokemon(data);
+            });
+          })
+          .catch((error) => {
+            container.textContent = 'お気に入りの読み込み失敗!';
+            console.error('Error getting documents: ', error);
+          });
+      };
+
+      window.addEventListener('DOMContentLoaded', loadFavorites);
 
       //イベントリスナーの設定
       submitButton.addEventListener('click', () => {

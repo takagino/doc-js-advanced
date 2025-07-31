@@ -94,31 +94,57 @@
       </div>
     </div>
     <script>
+      // const students = [
+      //   '磯部 紗那',
+      //   '加藤 美羽',
+      //   '金原 武陽',
+      //   '亀田 啓斗',
+      //   'KHANT KYAW',
+      //   '岸本 璃空',
+      //   '清井 すず',
+      //   '栗田 蓮音',
+      //   '後藤 匠',
+      //   '佐藤 礼都',
+      //   '鈴木 優太郎',
+      //   '竹岡 美虹',
+      //   'THADAR MOE HTET',
+      //   '通事 陽菜',
+      //   '中村 紫音',
+      //   '西岡 恭佑',
+      //   '殖田 結貴',
+      //   '細田 侑里',
+      //   '増元 ひかり',
+      //   '水竹 凛',
+      //   'MYAT THANDAR',
+      //   '八木 ジョナタン',
+      //   '山内 拡登',
+      //   '湯浅 遼次',
+      // ];
       const students = [
-        '磯部 紗那',
-        '加藤 美羽',
-        '金原 武陽',
+        '栗田 蓮音',
+        '八木 ジョナタン',
+        '中村 紫音',
+        '鈴木 優太郎',
+        'MYAT THANDAR',
+        '通事 陽菜',
+        '清井 すず',
+        '湯浅 遼次',
+        '岸本 璃空',
+        '西岡 恭佑',
         '亀田 啓斗',
         'KHANT KYAW',
-        '岸本 璃空',
-        '清井 すず',
-        '栗田 蓮音',
-        '後藤 匠',
-        '佐藤 礼都',
-        '鈴木 優太郎',
-        '竹岡 美虹',
-        'THADAR MOE HTET',
-        '通事 陽菜',
-        '中村 紫音',
-        '西岡 恭佑',
-        '殖田 結貴',
-        '細田 侑里',
         '増元 ひかり',
+        '殖田 結貴',
+        '金原 武陽',
+        'THADAR MOE HTET',
+        '後藤 匠',
         '水竹 凛',
-        'MYAT THANDAR',
-        '八木 ジョナタン',
         '山内 拡登',
-        '湯浅 遼次',
+        '竹岡 美虹',
+        '加藤 美羽',
+        '細田 侑里',
+        '佐藤 礼都',
+        '磯部 紗那',
       ];
       let timerId = null;
       let listItems = [];
@@ -152,14 +178,18 @@
       }
 
       startButton.addEventListener('click', () => {
-        if (timerId) return;
+        // if (timerId) return;
 
-        timerId = setInterval(() => {
-          const shuffledStudents = shuffle([...students]);
-          listItems.forEach((item, index) => {
-            item.textContent = shuffledStudents[index];
-          });
-        }, 100);
+        // timerId = setInterval(() => {
+        //   const shuffledStudents = shuffle([...students]);
+        //   listItems.forEach((item, index) => {
+        //     item.textContent = shuffledStudents[index];
+        //   });
+        // }, 100);
+
+        listItems.forEach((item, index) => {
+          item.textContent = students[index];
+        });
       });
 
       stopButton.addEventListener('click', () => {

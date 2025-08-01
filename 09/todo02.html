@@ -40,7 +40,7 @@
       const prioritySelect = document.querySelector('#prioritySelect');
 
       async function fetchTodos() {
-        todoList.innerHTML = ''; // リストをクリア
+        todoList.innerHTML = '';
 
         const { data, error } = await client
           .from('todo')
@@ -83,7 +83,7 @@
       }
 
       async function addTodo() {
-        const priority = prioritySelect.value; // 値の取得
+        const priority = prioritySelect.value;
         const title = todoInput.value.trim();
 
         if (title === '') {
@@ -93,7 +93,7 @@
 
         const { data, error } = await client.from('todo').insert({
           title: title,
-          priority: priority, // 保存するデータを追加
+          priority: priority,
         });
 
         if (error) {
